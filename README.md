@@ -6,7 +6,6 @@
 
 ## Features
 - Fast & Multi-threaded
-- Clean Output with Results Summary
 - Auto Retry on Rate-Limit
 
 ---
