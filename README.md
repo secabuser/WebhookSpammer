@@ -6,7 +6,6 @@
 
 ## Features
 - Fast & Multi-threaded
-- Custom Username & Delay
 - Clean Output with Results Summary
 - Auto Retry on Rate-Limit
 
