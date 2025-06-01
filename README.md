@@ -1,4 +1,3 @@
-````markdown
 # Discord Webhook Spammer 🇮🇷
 
 ![Screenshot of Tool](tool_screenshot.png)
