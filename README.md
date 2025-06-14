@@ -1,114 +1,41 @@
-# Discord Webhook Spammer
+# 💎 Best Discord Token Grabber - Send To Telegram Bot
 
-![Screenshot of Tool](tool_screenshot.png)
-
----
-
-## Features
-- Fast & Multi-threaded
-- Auto Retry on Rate-Limit
-
----
-
-## Requirements
-- Python 3.x or later.
-- Required libraries:
-  - `requests`
-  - `user_agent`
-  - `colorama`
-  - `pystyle`
-
-Install dependencies using:
-```bash
-pip install -r requirements.txt
-````
+![Tool Screenshot](tool_screenshot.png)
 
 ---
 
 ## How to Use
 
-### Linux
+### Setup
 
-#### Step 1: Install Prerequisites
+1.  Get your **Telegram Bot Token** from @BotFather.
+2.  Get your **Telegram Chat ID** send mass to @userinfobot.
 
-1. Verify Python 3.x is installed:
 
-   ```bash
-   python3 --version
-   ```
-2. If not installed:
+## Convert to Executable (.exe)
 
-   ```bash
-   sudo apt update
-   sudo apt install python3 python3-pip
-   ```
-3. Install required libraries:
+You can convert the Python script into a standalone executable (`.exe`) file for easier distribution on Windows.
 
-   ```bash
-   pip3 install requests user_agent colorama pystyle
-   ```
+1.  **Install PyInstaller:**
+    Open `cmd` or PowerShell and run:
+    ```cmd
+    pip install pyinstaller
+    ```
 
-#### Step 2: Run the Script
+2.  **Generate the Executable:**
+    Navigate to the directory where `main.py` is saved, then run:
+    ```cmd
+    pyinstaller --onefile --noconsole main.py
+    ```
+    * `--onefile`: Packages everything into a single `.exe` file.
+    * `--noconsole`: Prevents a console window from opening when the `.exe` is run.
 
-```bash
-python3 main.py
-```
+3.  **Find the Executable:**
+    The generated `.exe` file (`main.exe` by default) will be located in the `dist` folder within your script's directory.
 
-#### Step 3: Provide Inputs
+## Results
 
-* Webhook URL
-* Message to send
-* Username (optional)
-* Number of messages
-* Number of threads
-* Delay per message
-
-#### Step 4: View Results
-
-* See success count and elapsed time in a nice formatted table.
-
----
-
-### Windows
-
-#### Step 1: Install Python
-
-* Download and install Python from [https://www.python.org/](https://www.python.org/)
-* During install, make sure to **check** `Add Python to PATH`.
-
-Verify installation:
-
-```cmd
-python --version
-```
-
-#### Step 2: Install Required Libraries
-
-Open `cmd` and run:
-
-```cmd
-pip install requests user_agent colorama pystyle
-```
-
-#### Step 3: Run the Script
-
-```cmd
-python main.py
-```
-
-#### Step 4: Enter Info
-
-Provide:
-
-* Webhook URL
-* Message content
-* Optional username
-* Number of messages to send
-* Thread count
-* Delay between sends
-
-#### Step 5: Results
-
-Tool will display results including success count and time taken.
+* All Info Sended To Telegram Bot.
+* Full Fast
 
 ---
