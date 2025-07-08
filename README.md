@@ -17,21 +17,6 @@
 ---
 
 
-## Requirements
-
-- Python 3.x or later.
-
-- Required libraries:
-
-  - `requests`
-
-  - `user_agent`
-
-  - `colorama`
-
-  - `pystyle`
-
-
 Install dependencies using:
 
 ```bash
