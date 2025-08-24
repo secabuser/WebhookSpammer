@@ -38,13 +38,11 @@ class Counter:
     def increment(self):
         self.value += 1
         
-    def get_elapsed_time(self):
+    def _glt(self):
         return timedelta(seconds=int(time() - self.start_time))
 
-def show_banner():
+def _sb():
     print(Colorate.Diagonal(Colors.red_to_blue, Center.XCenter("""
-
-
 ▗▖ ▗▖▗▄▄▄▖▗▄▄▖ ▗▖ ▗▖ ▗▄▖  ▗▄▖ ▗▖ ▗▖     ▗▄▄▖▗▄▄▖  ▗▄▖ ▗▖  ▗▖▗▖  ▗▖▗▄▄▄▖▗▄▄▖ 
 ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌▗▞▘    ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▛▚▞▜▌▐▛▚▞▜▌▐▌   ▐▌ ▐▌
 ▐▌ ▐▌▐▛▀▀▘▐▛▀▚▖▐▛▀▜▌▐▌ ▐▌▐▌ ▐▌▐▛▚▖      ▝▀▚▖▐▛▀▘ ▐▛▀▜▌▐▌  ▐▌▐▌  ▐▌▐▛▀▀▘▐▛▀▚▖
@@ -52,29 +50,29 @@ def show_banner():
                                                                             
                                t.me/secabuser                    
 """)))
-def clear_screen():
+def _csr():
     system('cls' if name == 'nt' else 'clear')
 
-def show_results(counter, webhook_url, message_content, total_sends_requested):
-    clear_screen()
-    show_banner()
+def _sr(counter, _wu, message_content, _tsr):
+    _csr()
+    _sb()
     
-    display_webhook_url = webhook_url if len(webhook_url) <= 30 else webhook_url[:27] + "..."
-    display_message_content = message_content if len(message_content) <= 30 else message_content[:27] + "..."
+    display__wu = _wu if len(_wu) <= 30 else _wu[:27] + "..."
+    _dmc = message_content if len(message_content) <= 30 else message_content[:27] + "..."
 
-    results_box = f"""
+    _rb = f"""
 ╔{'═'*40}╗
 ║{' RESULTS   '.center(38)}  ║
 ╠{'═'*40}╣
-║ Message >  {display_message_content.ljust(28)}║
-║ Requested Sends >  {str(total_sends_requested).ljust(20)}║
+║ Message >  {_dmc.ljust(28)}║
+║ Requested Sends >  {str(_tsr).ljust(20)}║
 ║ Successful Sends > {str(counter.value).ljust(20)}║
-║ Elapsed Time >{str(counter.get_elapsed_time()).ljust(24)} ║
+║ Elapsed Time >{str(counter._glt()).ljust(24)} ║
 ╚{'═'*40}╝
 """
-    print(Colorate.Diagonal(Colors.red_to_blue, Center.XCenter(results_box)))
+    print(Colorate.Diagonal(Colors.red_to_blue, Center.XCenter(_rb)))
 
-def send_webhook_message(webhook_url, message, username="Webhook Spammer", avatar_url=None):
+def send_webhook_message(_wu, message, username="Webhook Spammer", avatar_url=None):
     headers = {
         "User-Agent": generate_user_agent(),
         "Content-Type": "application/json"
@@ -84,14 +82,14 @@ def send_webhook_message(webhook_url, message, username="Webhook Spammer", avata
         "username": username,
         "avatar_url": avatar_url
     }
-    return post(webhook_url, json=payload, headers=headers)
+    return post(_wu, json=payload, headers=headers)
 
-def spam_webhook(webhook_url, message_content, counter, total_sends_requested, delay_per_send, username):
-    if counter.value >= total_sends_requested:
+def spam_webhook(_wu, message_content, counter, _tsr, delay_per_send, username):
+    if counter.value >= _tsr:
         return
 
     try:
-        response = send_webhook_message(webhook_url, message_content, username=username)
+        response = send_webhook_message(_wu, message_content, username=username)
         
         if response.status_code in [200, 204]:
             print(f"{g}Webhook Sent | ({response.status_code}){re}")
@@ -101,7 +99,7 @@ def spam_webhook(webhook_url, message_content, counter, total_sends_requested, d
                 retry_after = response.json().get('retry_after') / 1000.0
                 print(f"{y}Rate Limited! Retrying after {retry_after:.2f} seconds...{re}")
                 sleep(retry_after)
-                response = send_webhook_message(webhook_url, message_content, username=username)
+                response = send_webhook_message(_wu, message_content, username=username)
                 if response.status_code in [200, 204]:
                     print(f"{g}Webhook Sent (after retry) | ({response.status_code}){re}")
                     counter.increment()
@@ -121,12 +119,12 @@ def spam_webhook(webhook_url, message_content, counter, total_sends_requested, d
         
 
 def main():
-    clear_screen()
-    show_banner()
+    _csr()
+    _sb()
     
     try:
-        webhook_url = input(f'{w}Webhook > {re}').strip() # Webhook Url
-        if not webhook_url or not webhook_url.startswith("https://discord.com/api/webhooks/"):
+        _wu = input(f'{w}Webhook > {re}').strip() # Webhook Url
+        if not _wu or not _wu.startswith("https://discord.com/api/webhooks/"):
             print(f"{r}Invalid Discord Webhook URL. Please enter a valid URL. :] {re}")
             sys.exit(1)
 
@@ -140,8 +138,8 @@ def main():
             username_input = "Webhook Spammer" # UserName Webhook
         
         try:
-            total_sends_requested = int(input(f'{w}Total Messages > {re}') or 10) # Totol(number) Message
-            if total_sends_requested < 1:
+            _tsr = int(input(f'{w}Total Messages > {re}') or 10) # Totol(number) Message
+            if _tsr < 1:
                 print(f"{r}Total messages to send must be 1 or more :] {re}")
                 sys.exit(1)
         except ValueError:
@@ -166,15 +164,15 @@ def main():
             print(f"{r}Invalid delay time :] {re}")
             sys.exit(1)
 
-        clear_screen()
-        show_banner()
+        _csr()
+        _sb()
         
         counter = Counter()
         
-        print(f"\n{w}Starting Webhook Spam... (Sending {total_sends_requested} messages)\n")
+        print(f"\n{w}Starting Webhook Spam... (Sending {_tsr} messages)\n")
         
-        while counter.value < total_sends_requested:
-            remaining_sends = total_sends_requested - counter.value
+        while counter.value < _tsr:
+            remaining_sends = _tsr - counter.value
             threads_to_run = min(max_threads, remaining_sends)
 
             if threads_to_run == 0:
@@ -183,8 +181,8 @@ def main():
             with ThreadPoolExecutor(max_workers=threads_to_run) as executor:
                 futures = [
                     executor.submit(
-                        spam_webhook, webhook_url, message_content, counter,
-                        total_sends_requested, delay_per_send, username_input
+                        spam_webhook, _wu, message_content, counter,
+                        _tsr, delay_per_send, username_input
                     )
                     for _ in range(threads_to_run)
                 ]
@@ -198,7 +196,7 @@ def main():
         print(f"\n{r}An unexpected error occurred > {e}{re}")
         sys.exit(1)
     finally:
-        show_results(counter, webhook_url, message_content, total_sends_requested)
+        _sr(counter, _wu, message_content, _tsr)
 
 if __name__ == "__main__":
     main()
